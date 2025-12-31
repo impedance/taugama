@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/ENTRYPOINT-EXT - extension module exports + omega-target re-export; ref: README.md; risk: mismatched exports breaks background/options UI integration
 module.exports =
   Storage: require('./storage')
   SyncStorage: require('./sync_storage')

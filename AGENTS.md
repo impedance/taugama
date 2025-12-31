@@ -10,22 +10,19 @@ This file is the primary entry point for any AI agent working in this repository
 In this repository, agent documentation is:
 - `README.md` as an index map (paths -> entry points -> commands -> "how to find via rg").
 - `AICODE-*` anchors in code/docs as stable links for `rg -n "AICODE-"`.
-- `docs/status.md` as living context (current focus, next steps, risks).
-- `docs/decisions/*` (ADR) as "why" and accepted tradeoffs.
+- `docs/aicode.md` as the source of truth for AICODE rules/schema.
+- `docs/` as optional project-specific context (status/decisions/etc), if/when added.
 
 ## Required documents
-- `docs/aicode-anchors.md` - rules and schema for AICODE anchors (allowed prefixes, dates, templates, namespace).
-- `docs/ynab-lite-pwa-plan.md` - product plan/roadmap (source of truth for scope).
-- `docs/context.md` - concise context skeleton (mission, stack, architectural patterns, invariants).
-- `docs/status.md` - current focus and next steps.
+- `README.md` - repository map and build instructions.
+- `docs/aicode.md` - rules and schema for AICODE anchors (allowed prefixes, dates, templates, namespace).
 
 ## Session Boot Checklist
 
 1) Read this `AGENTS.md`.
 2) Read `README.md` and use it as a repository map (Repository layout / Entry points / Search cookbook).
 3) Run `rg -n "AICODE-"` (narrow by directory if needed) to find contracts/traps/notes near the code.
-4) Read `docs/context.md` (mission/stack/patterns/invariants) and `docs/status.md` (current focus/next steps/risks).
-4) Read `docs/ynab-lite-pwa-plan.md` (if the task is product or plan related).
+4) Read `docs/aicode.md` (anchor rules/schema).
 5) Before any changes, run `rg -n "AICODE-"` and find relevant anchors.
 
 ## If navigation is missing or outdated
@@ -56,19 +53,17 @@ Goal: `README.md` should be a table of contents into code - file paths as links 
 ### How to update the index
 - Do not use line numbers as links.
 - Before adding new AICODE anchors run `rg -n "AICODE-"` and avoid duplicates.
-- If navigation without anchors is fragile (refactors break the pointers) add the minimum AICODE anchors in strategic places, strictly following `docs/aicode-anchors.md`.
+- If navigation without anchors is fragile (refactors break the pointers) add the minimum AICODE anchors in strategic places, strictly following `docs/aicode.md`.
 
 ## AICODE rules (critical)
-- Anchors: only `AICODE-*` and only allowed prefixes from `docs/aicode-anchors.md`.
+- Anchors: only `AICODE-*` and only allowed prefixes from `docs/aicode.md`.
 - Before adding new anchors always run `rg -n "AICODE-"` to avoid duplicates.
 - For `TRAP/CONTRACT` a date `[YYYY-MM-DD]` is mandatory.
 
 ## Where to write context
 
 - Navigation and "where to look": `README.md` (plus targeted `AICODE-NOTE: NAV/...` near code).
-- Current focus / next steps / risks: `docs/status.md` (short lists).
-- Mission / stack / patterns / invariants: `docs/context.md` (rarely changes).
-- "Why so" and tradeoffs: `docs/decisions/*` (ADR), with `ref:` and `AICODE-LINK:` in code if needed.
+- Project-specific notes (status/decisions/etc): `docs/` (keep short lists).
 
 ## Additional interaction rules
 
@@ -79,8 +74,9 @@ Goal: `README.md` should be a table of contents into code - file paths as links 
 
 - Relevant `AICODE-*` anchors updated in affected areas (if behavior/contracts changed).
 - If structure/entry points changed - update `README.md` (index).
-- If focus/plan changed - update `docs/status.md` (short).
-- Checks run: `npm run lint:aicode` and `npm test` (or equivalent project commands).
+- Checks run (or equivalent project commands):
+  - `cd omega-pac && npm test`
+  - `cd omega-target && npm test`
 
 
 ## Skills

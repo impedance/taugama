@@ -11,6 +11,60 @@ Manage and switch between multiple proxies quickly & easily.
 
 [![Translation status](https://hosted.weblate.org/widgets/switchyomega/-/svg-badge.svg)](https://hosted.weblate.org/engage/switchyomega/?utm_source=widget)
 
+<!-- AICODE-NOTE: NAV/README-INDEX - README is the primary repository map for agents; ref: AGENTS.md, docs/aicode.md; risk: hard-to-find entry points during changes -->
+
+Agent navigation (AICODE)
+-------------------------
+
+This section is a lightweight index for contributors/agents. It follows `AGENTS.md` and `docs/aicode.md`.
+
+### Repository layout
+
+- `AGENTS.md` - agent protocol (what to read/run first); search: `rg -n "AICODE-"`.
+- `docs/aicode.md` - AICODE anchor rules/schema; search: `rg -n "AICODE-" docs/aicode.md`.
+- `omega-build/` - build orchestrator (grunt hub + cross-module scripts); entry: `omega-build/package.json`.
+- `omega-pac/` - PAC generator module (profiles -> PAC script); entry: `omega-pac/index.coffee`; search: `rg -n "PacGenerator" omega-pac/src`.
+- `omega-target/` - browser-independent options manager & core logic; entry: `omega-target/index.coffee`; search: `rg -n "class Options" omega-target/src/options.coffee`.
+- `omega-web/` - web-based configuration UI (Angular); entry: `omega-web/src/`; search: `rg -n "angular\\.module\\(" omega-web/src`.
+- `omega-target-chromium-extension/` - WebExtension target + build; entry: `omega-target-chromium-extension/src/module/index.coffee`.
+- `omega-locales/` - translation sources; search: `rg -n "message" omega-locales | head`.
+- `omega-target-chromium-extension/overlay/` - packaged overlay assets; search: `rg -n "overlay" omega-target-chromium-extension`.
+- `.circleci/` - CI config; search: `rg -n "omega-(pac|target)" .circleci`.
+- `.github/` - issue/PR templates; search: `rg -n "ZeroOmega" .github`.
+
+### Entry points
+
+- `omega-build/package.json` - canonical dev/build/release commands; search: `rg -n "\"scripts\"" omega-build/package.json`.
+- `omega-pac/index.coffee` - omega-pac public exports; search: `rg -n "module\\.exports" omega-pac/index.coffee`.
+- `omega-pac/src/pac_generator.coffee` - PAC generation core; search: `rg -n "class PacGenerator" omega-pac/src/pac_generator.coffee`.
+- `omega-target/index.coffee` - omega-target public exports; search: `rg -n "module\\.exports" omega-target/index.coffee`.
+- `omega-target/src/options.coffee` - main options/profile logic; search: `rg -n "class Options" omega-target/src/options.coffee`.
+- `omega-target/src/storage.coffee` - storage abstraction; search: `rg -n "class Storage" omega-target/src/storage.coffee`.
+- `omega-target-chromium-extension/src/module/index.coffee` - extension wiring + re-exports from `omega-target`; search: `rg -n "for name, value of require\\('omega-target'\\)" omega-target-chromium-extension/src/module/index.coffee`.
+- `omega-target-chromium-extension/src/coffee/background.coffee` - background script entry; search: `rg -n "background" omega-target-chromium-extension/src/coffee/background.coffee`.
+- `omega-target-chromium-extension/src/coffee/omega_target_web.coffee` - browser-dependent bridge for `omega-web`; search: `rg -n "omegaTarget" omega-target-chromium-extension/src/coffee/omega_target_web.coffee`.
+
+### Common tasks
+
+- Install deps in all modules: `cd omega-build && npm run deps`
+- Link local modules for dev: `cd omega-build && npm run dev`
+- Build: `cd omega-build && npm run build`
+- Release packages: `cd omega-build && npm run release`
+- Run unit tests: `cd omega-pac && npm test` and `cd omega-target && npm test`
+
+### Search cookbook
+
+- All anchors: `rg -n "AICODE-"`.
+- Only canonical prefixes: `rg -n "AICODE-(NOTE|TODO|CONTRACT|TRAP|LINK|ASK):"`.
+- omega-pac core: `rg -n "class PacGenerator|compile\\:" omega-pac/src`.
+- omega-pac profiles model: `rg -n "class Profiles|defaultProfile" omega-pac/src`.
+- omega-target main Options: `rg -n "class Options" omega-target/src/options.coffee`.
+- omega-target storage: `rg -n "class Storage|set\\:|get\\:" omega-target/src/storage.coffee`.
+- omega-target sync: `rg -n "class OptionsSync" omega-target/src/options_sync.coffee`.
+- extension background wiring: `rg -n "background\\.coffee|chrome\\." omega-target-chromium-extension/src/coffee`.
+- extension proxy impl: `rg -n "proxy_impl|proxy_auth" omega-target-chromium-extension/src/module/proxy`.
+- web UI entry points: `rg -n "angular\\.module\\(|\\.controller\\(" omega-web/src`.
+
 Chromium Extension
 ------------------
 The project is available as a Chromium Extension.

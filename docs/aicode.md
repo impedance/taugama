@@ -22,7 +22,7 @@ Goal: most context lives next to code and is discoverable via `rg -n "AICODE-"`.
 
 Before reading code deeply:
 - MUST search for existing anchors in the repo: `rg -n "AICODE-"`.
-- SHOULD narrow to a module: `rg -n "AICODE-" app/repositories`.
+- SHOULD narrow to a module: `rg -n "AICODE-" omega-target`.
 - Allowed tags: `AICODE-NOTE`, `AICODE-TODO`, `AICODE-CONTRACT`, `AICODE-TRAP`, `AICODE-LINK`, `AICODE-ASK`.
 - Long-lived tags (`CONTRACT/TRAP`) MUST include a date `[YYYY-MM-DD]` on the same line.
 
@@ -82,8 +82,8 @@ Principle: prefix is fixed, topic is inside the text. We do not introduce new pr
 Example:
 ```ts
 // AICODE-NOTE: NAV/REPO-LAYOUT - short map of key paths; ref: README.md; risk: agent will get lost
-// AICODE-NOTE: STATUS/FOCUS - current focus and next steps; ref: docs/status.md
-// AICODE-NOTE: DECISION/ADR-0001 - why we chose AICODE+README for navigation; ref: docs/decisions/ADR-0001-anchor-navigation.md
+// AICODE-NOTE: STATUS/FOCUS - current focus and next steps; ref: README.md
+// AICODE-NOTE: DECISION/ADR-0001 - why we chose AICODE+README for navigation; ref: README.md
 ```
 
 ### Namespace after `:`
@@ -91,7 +91,7 @@ Example:
 - `CONTRACT/<slug>` - behavior invariants (use with `AICODE-CONTRACT:`).
 - `TRAP/<slug>` - sharp edges/regressions (use with `AICODE-TRAP:`).
 - `DECISION/<id>` - architectural decisions (ADR).
-- `STATUS/<slug>` - operational status (use only in `docs/status.md`).
+- `STATUS/<slug>` - operational status (use only in dedicated status docs, if you have them).
 - `TEST/<slug>` - where to test/which tests.
 
 Slug style:
@@ -146,24 +146,24 @@ Slug style:
 - Do not repeat the obvious ("increment i", "sort list").
 - Do not write essays or logs - the anchor must be short.
 - Do not put secrets/tokens/sensitive data.
-- Do not use `AICODE-TODO:` as a task tracker (use `docs/todo.md`).
+- Do not use `AICODE-TODO:` as a task tracker (use your issue tracker / PR description).
 - Do not leave ambiguity ("maybe", "probably"), unless it is `AICODE-ASK:`.
 
 ## 10) Examples
 
 ### NOTE - invariant + source of truth
 ```python
-# AICODE-NOTE: traversal order is index -> numeric -> alpha (recursive); ref: docs/hierarchy-analysis.md; risk: TOC/section order regressions
+# AICODE-NOTE: traversal order is index -> numeric -> alpha (recursive); ref: <path>; risk: regressions
 ```
 
 ### NOTE - link to tests/spec
 ```python
-# AICODE-NOTE: image path mapping strips numeric prefixes and targets /images/<slug>/...; ref: tests/test_images.py; risk: broken asset links in bundle.md
+# AICODE-NOTE: image path mapping strips numeric prefixes and targets /images/<slug>/...; ref: <path>; risk: broken asset links
 ```
 
 ### TODO - local follow-up
 ```python
-# AICODE-TODO: add a unit test for the tagged-PDF fallback branch; scope: pandoc_runner.render; test: tests/test_pandoc_runner.py
+# AICODE-TODO: add a unit test for the fallback branch; scope: <fn>; test: <path>
 ```
 
 ### ASK - needs decision

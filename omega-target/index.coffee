@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/ENTRYPOINT-TARGET - omega-target public exports live here; ref: README.md; risk: changing exports breaks targets and omega-web integration
 module.exports =
   Log: require('./src/log')
   Storage: require('./src/storage')

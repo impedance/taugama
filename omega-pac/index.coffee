@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/ENTRYPOINT-PAC - omega-pac public exports live here; ref: README.md; risk: changing exports breaks omega-target/targets
 module.exports =
   Conditions: require('./src/conditions')
   PacGenerator: require('./src/pac_generator')
