@@ -1,4 +1,5 @@
 ### @module omega-target/storage ###
+# AICODE-NOTE: NAV/STORAGE-CORE - storage abstraction used by targets; ref: README.md; risk: inconsistent persistence/merges
 Promise = require 'bluebird'
 Log = require './log'
 

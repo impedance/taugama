@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/WEB-APP - omega angular module config/route setup; ref: README.md; risk: UI boot/route regressions
 angular.module('omega').constant('builtinProfiles',
   OmegaPac.Profiles.builtinProfiles)
 

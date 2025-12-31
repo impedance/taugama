@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/OMEGA-TARGET-WEB - browser bridge for omega-web; ref: README.md; risk: UI cannot reach target APIs
 queryTab = (cb) ->
   chrome.tabs.query {active: true, lastFocusedWindow: true}, (tabs) ->
     if tabs.length == 0 or not (tabs[0].pendingUrl || tabs[0].url)

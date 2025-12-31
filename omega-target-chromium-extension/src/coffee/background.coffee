@@ -1,3 +1,4 @@
+# AICODE-NOTE: NAV/EXT-BACKGROUND - extension background entrypoint; ref: README.md; risk: startup/init regressions
 OmegaTargetCurrent = Object.create(OmegaTargetChromium)
 Promise = OmegaTargetCurrent.Promise
 Promise.longStackTraces()

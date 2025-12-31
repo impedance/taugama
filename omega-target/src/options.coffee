@@ -1,4 +1,5 @@
 ### @module omega-target/options ###
+# AICODE-NOTE: NAV/OPTIONS-CORE - main options/profile logic; ref: README.md; risk: state/profile regressions across targets
 Promise = require 'bluebird'
 Log = require './log'
 Storage = require './storage'

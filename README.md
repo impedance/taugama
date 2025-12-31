@@ -23,9 +23,9 @@ This section is a lightweight index for contributors/agents. It follows `AGENTS.
 - `AGENTS.md` - agent protocol (what to read/run first); search: `rg -n "AICODE-"`.
 - `docs/aicode.md` - AICODE anchor rules/schema; search: `rg -n "AICODE-" docs/aicode.md`.
 - `omega-build/` - build orchestrator (grunt hub + cross-module scripts); entry: `omega-build/package.json`.
-- `omega-pac/` - PAC generator module (profiles -> PAC script); entry: `omega-pac/index.coffee`; search: `rg -n "PacGenerator" omega-pac/src`.
-- `omega-target/` - browser-independent options manager & core logic; entry: `omega-target/index.coffee`; search: `rg -n "class Options" omega-target/src/options.coffee`.
-- `omega-web/` - web-based configuration UI (Angular); entry: `omega-web/src/`; search: `rg -n "angular\\.module\\(" omega-web/src`.
+- `omega-pac/` - PAC generator module (profiles -> PAC script); entry: `omega-pac/index.coffee`; search: `rg -n "NAV/PAC-GENERATOR" omega-pac/src/pac_generator.coffee`.
+- `omega-target/` - browser-independent options manager & core logic; entry: `omega-target/index.coffee`; search: `rg -n "NAV/OPTIONS-CORE" omega-target/src/options.coffee`.
+- `omega-web/` - web-based configuration UI (Angular); entry: `omega-web/src/`; search: `rg -n "NAV/WEB-APP" omega-web/src/omega/app.coffee`.
 - `omega-target-chromium-extension/` - WebExtension target + build; entry: `omega-target-chromium-extension/src/module/index.coffee`.
 - `omega-locales/` - translation sources; search: `rg -n "message" omega-locales | head`.
 - `omega-target-chromium-extension/overlay/` - packaged overlay assets; search: `rg -n "overlay" omega-target-chromium-extension`.
@@ -36,13 +36,13 @@ This section is a lightweight index for contributors/agents. It follows `AGENTS.
 
 - `omega-build/package.json` - canonical dev/build/release commands; search: `rg -n "\"scripts\"" omega-build/package.json`.
 - `omega-pac/index.coffee` - omega-pac public exports; search: `rg -n "module\\.exports" omega-pac/index.coffee`.
-- `omega-pac/src/pac_generator.coffee` - PAC generation core; search: `rg -n "class PacGenerator" omega-pac/src/pac_generator.coffee`.
+- `omega-pac/src/pac_generator.coffee` - PAC generation core; search: `rg -n "NAV/PAC-GENERATOR" omega-pac/src/pac_generator.coffee`.
 - `omega-target/index.coffee` - omega-target public exports; search: `rg -n "module\\.exports" omega-target/index.coffee`.
-- `omega-target/src/options.coffee` - main options/profile logic; search: `rg -n "class Options" omega-target/src/options.coffee`.
-- `omega-target/src/storage.coffee` - storage abstraction; search: `rg -n "class Storage" omega-target/src/storage.coffee`.
+- `omega-target/src/options.coffee` - main options/profile logic; search: `rg -n "NAV/OPTIONS-CORE" omega-target/src/options.coffee`.
+- `omega-target/src/storage.coffee` - storage abstraction; search: `rg -n "NAV/STORAGE-CORE" omega-target/src/storage.coffee`.
 - `omega-target-chromium-extension/src/module/index.coffee` - extension wiring + re-exports from `omega-target`; search: `rg -n "for name, value of require\\('omega-target'\\)" omega-target-chromium-extension/src/module/index.coffee`.
-- `omega-target-chromium-extension/src/coffee/background.coffee` - background script entry; search: `rg -n "background" omega-target-chromium-extension/src/coffee/background.coffee`.
-- `omega-target-chromium-extension/src/coffee/omega_target_web.coffee` - browser-dependent bridge for `omega-web`; search: `rg -n "omegaTarget" omega-target-chromium-extension/src/coffee/omega_target_web.coffee`.
+- `omega-target-chromium-extension/src/coffee/background.coffee` - background script entry; search: `rg -n "NAV/EXT-BACKGROUND" omega-target-chromium-extension/src/coffee/background.coffee`.
+- `omega-target-chromium-extension/src/coffee/omega_target_web.coffee` - browser-dependent bridge for `omega-web`; search: `rg -n "NAV/OMEGA-TARGET-WEB" omega-target-chromium-extension/src/coffee/omega_target_web.coffee`.
 
 ### Common tasks
 
@@ -56,14 +56,14 @@ This section is a lightweight index for contributors/agents. It follows `AGENTS.
 
 - All anchors: `rg -n "AICODE-"`.
 - Only canonical prefixes: `rg -n "AICODE-(NOTE|TODO|CONTRACT|TRAP|LINK|ASK):"`.
-- omega-pac core: `rg -n "class PacGenerator|compile\\:" omega-pac/src`.
+- omega-pac core: `rg -n "NAV/PAC-GENERATOR" omega-pac/src/pac_generator.coffee`.
 - omega-pac profiles model: `rg -n "class Profiles|defaultProfile" omega-pac/src`.
-- omega-target main Options: `rg -n "class Options" omega-target/src/options.coffee`.
-- omega-target storage: `rg -n "class Storage|set\\:|get\\:" omega-target/src/storage.coffee`.
+- omega-target main Options: `rg -n "NAV/OPTIONS-CORE" omega-target/src/options.coffee`.
+- omega-target storage: `rg -n "NAV/STORAGE-CORE" omega-target/src/storage.coffee`.
 - omega-target sync: `rg -n "class OptionsSync" omega-target/src/options_sync.coffee`.
-- extension background wiring: `rg -n "background\\.coffee|chrome\\." omega-target-chromium-extension/src/coffee`.
+- extension background wiring: `rg -n "NAV/EXT-BACKGROUND" omega-target-chromium-extension/src/coffee/background.coffee`.
 - extension proxy impl: `rg -n "proxy_impl|proxy_auth" omega-target-chromium-extension/src/module/proxy`.
-- web UI entry points: `rg -n "angular\\.module\\(|\\.controller\\(" omega-web/src`.
+- web UI entry points: `rg -n "NAV/WEB-APP" omega-web/src/omega/app.coffee`.
 
 Chromium Extension
 ------------------

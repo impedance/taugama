@@ -1,6 +1,7 @@
 U2 = require 'uglify-js'
 Profiles = require './profiles'
 
+# AICODE-NOTE: NAV/PAC-GENERATOR - PAC AST + script builder entry; ref: README.md; risk: PAC output regressions
 # PacGenerator is used like a singleton class instance.
 # coffeelint: disable=missing_fat_arrows
 module.exports =
