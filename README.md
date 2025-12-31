@@ -142,7 +142,7 @@ below.
 ## Building the project
 
 ZeroOmega has migrated to use npm and grunt for building. Please note that
-node 20.x is required for this project.
+node 20.x is required for this project (see `.nvmrc`).
 
 To build the project:
 

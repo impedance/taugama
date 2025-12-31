@@ -13,12 +13,13 @@ class AST_Raw extends U2.AST_SymbolRef
 
 checkNeedFixForSocks5 = (proxy = {}) ->
   if proxy.scheme == 'socks5'
+    # AICODE-CONTRACT: CONTRACT/PAC-SOCKS5-COMPAT - emit "SOCKS5 ...; SOCKS ..." for PAC consumers; ref: omega-pac/test/profiles.coffee; risk: SOCKS5 proxy ignored in some browsers [2025-12-31]
+    if Object::hasOwnProperty.call(globalThis, 'FORCEFIXEXPORTSCRIPTFORSOCKS')
+      return !!globalThis.FORCEFIXEXPORTSCRIPTFORSOCKS
     # https://github.com/FelisCatus/SwitchyOmega/issues/391
-    if globalThis.FORCEFIXEXPORTSCRIPTFORSOCKS
-      return true
     # https://github.com/zero-peak/ZeroOmega/issues/147
     # https://github.com/zero-peak/ZeroOmega/issues/178
-    return false
+    return true
   return false
 
 decorateCustomBuiltinProfiles = (profile, options = {}) ->

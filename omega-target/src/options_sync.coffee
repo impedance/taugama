@@ -45,6 +45,8 @@ class OptionsSync
   constructor: (@storage, @builtInSyncStorage, @state, @_bucket) ->
     @_pending = {}
     @_bucket ?= new TokenBucket(10, 10, 'minute', null)
+    if @_bucket.bucketSize? and @_bucket.bucketSize > 0 and @_bucket.content? and @_bucket.content == 0
+      @_bucket.content = @_bucket.bucketSize
     @_bucket.clear ?= =>
       @_bucket.tryRemoveTokens(@_bucket.content)
 
@@ -70,6 +72,7 @@ class OptionsSync
   # @param {} oldVal The old value
   # @returns {} The merged result
   ###
+  # AICODE-CONTRACT: CONTRACT/SYNC-MERGE-DISABLED - if either side has syncOptions: "disabled", keep oldVal to preserve local lock; ref: omega-target/test/options_sync.coffee; risk: disabled sync re-enabled by merge [2025-12-31]
   merge: do ->
     diff = jsondiffpatch.create(
       objectHash: (obj) -> JSON.stringify(obj)
@@ -77,6 +80,8 @@ class OptionsSync
     )
     return (key, newVal, oldVal) ->
       return oldVal if newVal == oldVal
+      if oldVal?.syncOptions == 'disabled' or newVal?.syncOptions == 'disabled'
+        return oldVal
       if oldVal?.revision? and newVal?.revision?
         result = Revision.compare(oldVal.revision, newVal.revision)
         return oldVal if result >= 0
@@ -96,6 +101,7 @@ class OptionsSync
   # in a short period into a single write operation.
   # @param {Object.<string, {}>} changes A map from keys to values.
   ###
+  # AICODE-TRAP: TRAP/REQUESTPUSH-DEBOUNCE - debounce==0 should push immediately to avoid timer flakiness; ref: omega-target/test/options_sync.coffee; risk: test timeouts or delayed sync in fast paths [2025-12-31]
   requestPush: (changes) ->
     clearTimeout(@_timeout) if @_timeout?
     for own key, value of changes
@@ -104,7 +110,10 @@ class OptionsSync
         continue if typeof value == 'undefined'
       @_pending[key] = value
     return unless @enabled
-    @_timeout = setTimeout(@_doPush.bind(this), @debounce)
+    if @debounce == 0
+      @_doPush()
+    else
+      @_timeout = setTimeout(@_doPush.bind(this), @debounce)
 
   ###*
   # Returning the pending changes not written to the remote storage.

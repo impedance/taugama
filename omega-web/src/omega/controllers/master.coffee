@@ -31,7 +31,10 @@ angular.module('omega').controller 'MasterCtrl', ($scope, $rootScope, $window,
       $window.location.reload()
 
   $rootScope.exportScript = (event, name) ->
-    $window.FORCEFIXEXPORTSCRIPTFORSOCKS = !!event.shiftKey
+    if event.shiftKey
+      $window.FORCEFIXEXPORTSCRIPTFORSOCKS = true
+    else
+      delete $window.FORCEFIXEXPORTSCRIPTFORSOCKS
     getProfileName =
       if name
         $q.when(name)
@@ -402,4 +405,3 @@ angular.module('omega').controller 'MasterCtrl', ($scope, $rootScope, $window,
               $script 'js/options_guide.js'
 
   omegaTarget.refresh()
-
